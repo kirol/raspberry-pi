@@ -1,0 +1,2 @@
+By default, ssh is enabled. You can use network cable or wifi to connect to raspberry
+default username/pass: pi/raspberry
