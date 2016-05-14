@@ -1,0 +1,38 @@
+Just dropping a note to confirm that my Pi3 wifi issues (long ping-time, drop-outs) were fixed by adjusting power management.
+
+Doing this
+
+Code: Select all
+    sudo iwconfig wlan0 power off
+
+on the Pi3 whilst pinging it from another machine on the network completely solved the problem:
+
+Code: Select all
+    64 bytes from 192.168.1.135: icmp_seq=93 ttl=64 time=1879 ms
+    64 bytes from 192.168.1.135: icmp_seq=94 ttl=64 time=872 ms
+    64 bytes from 192.168.1.135: icmp_seq=95 ttl=64 time=4.30 ms
+    64 bytes from 192.168.1.135: icmp_seq=96 ttl=64 time=363 ms
+    64 bytes from 192.168.1.135: icmp_seq=97 ttl=64 time=1965 ms
+    64 bytes from 192.168.1.135: icmp_seq=98 ttl=64 time=966 ms
+    64 bytes from 192.168.1.135: icmp_seq=99 ttl=64 time=4.16 ms
+    64 bytes from 192.168.1.135: icmp_seq=100 ttl=64 time=361 ms
+    64 bytes from 192.168.1.135: icmp_seq=101 ttl=64 time=368 ms
+    64 bytes from 192.168.1.135: icmp_seq=102 ttl=64 time=1878 ms
+    64 bytes from 192.168.1.135: icmp_seq=103 ttl=64 time=871 ms
+
+
+then becomes this:
+
+Code: Select all
+    64 bytes from 192.168.1.135: icmp_seq=104 ttl=64 time=4.21 ms
+    64 bytes from 192.168.1.135: icmp_seq=105 ttl=64 time=5.34 ms
+    64 bytes from 192.168.1.135: icmp_seq=106 ttl=64 time=4.42 ms
+    64 bytes from 192.168.1.135: icmp_seq=107 ttl=64 time=5.08 ms
+    64 bytes from 192.168.1.135: icmp_seq=108 ttl=64 time=4.24 ms
+    64 bytes from 192.168.1.135: icmp_seq=109 ttl=64 time=4.75 ms
+    64 bytes from 192.168.1.135: icmp_seq=110 ttl=64 time=5.69 ms
+    64 bytes from 192.168.1.135: icmp_seq=111 ttl=64 time=4.57 ms
+
+
+
+There is a nice description on how to make this (plus a few other changes) survive reset, which is important as several people have reported that without doing this, some Pi3s will no longer accept any wifi connections after a few minutes.
